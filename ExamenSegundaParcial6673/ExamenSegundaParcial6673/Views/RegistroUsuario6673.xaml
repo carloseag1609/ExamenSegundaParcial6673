@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ExamenSegundaParcial6673.ViewModel"
+             x:Class="ExamenSegundaParcial6673.Views.RegistroUsuario6673"
+             x:Name="thisRegistroUsuario">
+    <ContentPage.BindingContext>
+        <vm:UsuarioViewModel6673 />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame BackgroundColor="#2196F3" Padding="10" CornerRadius="0">
+                <Label Text="Bienvenido" HorizontalTextAlignment="Center" TextColor="White" FontSize="30"/>
+            </Frame>
+            <StackLayout Margin="10" >  
+                <Label Text="Ingresa tus datos para continuar" FontSize="22" Margin="0,0,0,20" HorizontalTextAlignment="Center" />
+                
+                <Label Text="Nombre" />
+                <Entry Text="{Binding Nombre}" x:Name="Nombre" />
+                <Label Text="El nombre es obligatorio" TextColor="Red">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference Nombre}, Path=Text.Length}" Value="0">
+                            <Setter Property="IsVisible" Value="False"/>
+                            <Setter Property="IsVisible" Value="True"/>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+
+                <Label Text="Apellido paterno" />
+                <Entry Text="{Binding ApellidoPaterno}"  />
+
+                <Label Text="Apellido materno" />
+                <Entry Text="{Binding ApellidoMaterno}" />
+
+                <Label Text="Telefono" />
+                <Entry Text="{Binding Telefono}" />
+
+                <Button Text="Ingresar" Margin="0,20,0,0" BackgroundColor="#2196F3" TextColor="White" Command="{Binding cmdRegistrarUsuario}">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button"
+                                     Binding="{Binding Source={x:Reference Nombre}, Path=Text.Length}"
+                                     Value="0">
+                            <Setter Property="IsEnabled" Value="False" />
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

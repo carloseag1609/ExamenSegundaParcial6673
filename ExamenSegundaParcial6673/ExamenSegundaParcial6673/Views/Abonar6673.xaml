@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:ExamenSegundaParcial6673.Converters"
+             x:Name="thisAbonar"
+             x:Class="ExamenSegundaParcial6673.Views.Abonar6673">
+    <ContentPage.Resources>
+        <converters:IntToBooleanConverter6673 x:Key="intToBoolConverter" />
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Margin="10" >
+                <Label Text="Cantidad:" />
+                <Entry Text="{Binding NuevaCantidad}" Keyboard="Numeric" x:Name="Cantidad" />
+                <Label Text="La cantidad debe ser mayor a 0">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference Cantidad}, Path=Text, Converter={StaticResource intToBoolConverter}}" Value="0">
+                            <Setter Property="IsVisible" Value="False"/>
+                            <Setter Property="IsVisible" Value="True"/>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+
+                <Button Text="Abonar" BackgroundColor="#2196F3" TextColor="White" Command="{Binding cmdAbonarCuenta}">
+                    <!--<Button.Triggers>
+                        <DataTrigger TargetType="Button" Binding="{Binding Source={x:Reference Cantidad}, Path=Text, Converter={StaticResource intToBoolConverter}}" Value="0">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Button.Triggers>-->
+                </Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

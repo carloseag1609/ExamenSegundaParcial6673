@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Name="thisAgregarCuenta"
+             xmlns:vm="clr-namespace:ExamenSegundaParcial6673.ViewModel"
+             x:Class="ExamenSegundaParcial6673.Views.AgregarCuenta6673">
+    <ContentPage.BindingContext>
+        <vm:UsuarioViewModel6673 />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Margin="10" >
+                <Label Text="Ingresa los datos de la nueva cuenta" FontSize="22" Margin="0,0,0,20" HorizontalTextAlignment="Center" />
+
+                <Label Text="Nombre" />
+                <Entry Text="{Binding CuentaNombre}" />
+
+                <Label Text="Saldo inicial" />
+                <Entry Text="{Binding CuentaSaldo}" Keyboard="Numeric" />
+
+                <Button Text="Guardar" Margin="0,10,0,0" BackgroundColor="#2196F3" TextColor="White" Command="{Binding cmdAgregarCuenta}" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

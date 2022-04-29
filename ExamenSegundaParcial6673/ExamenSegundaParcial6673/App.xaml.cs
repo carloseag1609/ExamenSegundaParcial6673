@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExamenSegundaParcial6673.Views;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,7 +11,7 @@ namespace ExamenSegundaParcial6673
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new NavigationPage(new RegistroUsuario6673());
         }
 
         protected override void OnStart()

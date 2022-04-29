@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:ExamenSegundaParcial6673.Models"
+             x:Name="thisCuentas"
+             Background="White"
+             x:Class="ExamenSegundaParcial6673.Views.Cuentas6673">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Perfil"
+                 Order="Primary"
+                 Priority="0" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="110" />
+            </Grid.RowDefinitions>
+            <ScrollView Grid.Row="0" BackgroundColor="White" Margin="10" Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                <StackLayout VerticalOptions="FillAndExpand">
+                    <Label Text="{Binding BindingContext.Usuario.Nombre, StringFormat='Cuentas de: {0}', Source={x:Reference thisCuentas}}" HorizontalTextAlignment="Center" FontSize="25" Margin="0,0,0,10" />
+                    <CollectionView 
+                            ItemsSource="{Binding BindingContext.Cuentas, Source={x:Reference thisCuentas}}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:Cuenta6673">
+                                <Grid RowDefinitions="auto" ColumnDefinitions="140,auto" Margin="0,0,0,35">
+                                    <Label Grid.Row="0" Grid.Column="0" Text="Numero de cuenta:" FontSize="18" />
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding NumeroCuenta}" FontSize="18" FontAttributes="Bold" />
+                                    <Label Grid.Row="1" Grid.Column="0" Text="Saldo:" FontSize="18" />
+                                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding Saldo, Mode=OneWay, StringFormat='${0}'}" FontSize="18" FontAttributes="Bold" />
+                                    <BoxView HeightRequest="1"
+                                             WidthRequest="500"
+                                             BackgroundColor="#e1e1e1"
+                                             Grid.ColumnSpan="2"
+                                             Grid.Row="2"
+                                             VerticalOptions="Start"/>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                            Command="{Binding BindingContext.cmdCuentaDetalle, Source={x:Reference thisCuentas}}"
+                                            CommandParameter="{Binding .}" />
+                                    </Grid.GestureRecognizers>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </ScrollView>
+            <Button Text="+" BorderWidth="1"
+                    FontSize="30"
+                    FontAttributes="Bold"
+                    BackgroundColor="#2196F3"
+                    BorderRadius="100"
+                    TextColor="white"
+                    HorizontalOptions="EndAndExpand"
+                    WidthRequest="65"
+                    HeightRequest="65"
+                    Margin="0,0,20,20"
+                    VerticalOptions="EndAndExpand"
+                    Grid.Row="1"
+                    Command="{Binding BindingContext.cmdIrAgregarCuenta, Source={x:Reference thisCuentas}}"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

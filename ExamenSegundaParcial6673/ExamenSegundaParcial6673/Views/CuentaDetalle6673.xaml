@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Name="thisCuentaDetalle"
+             Background="White"
+             xmlns:model="clr-namespace:ExamenSegundaParcial6673.Models"
+             x:Class="ExamenSegundaParcial6673.Views.CuentaDetalle6673">
+    <ContentPage.Content>
+        <ScrollView Margin="10" Orientation="Vertical">
+            <StackLayout VerticalOptions="FillAndExpand">
+                <Label Text="{Binding BindingContext.Cuenta.NumeroCuenta, StringFormat='Información de la cuenta: {0}', Source={x:Reference thisCuentaDetalle}}" HorizontalTextAlignment="Center" FontSize="25" Margin="0,0,0,10" />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Button Text="Abonar" Grid.Row="0" Grid.Column="0" HorizontalOptions="FillAndExpand" BackgroundColor="#2196F3" TextColor="White" Margin="0,0,0,10" 
+                            Command="{Binding BindingContext.cmdIrAbonar, Source={x:Reference thisCuentaDetalle}}"
+                            />
+                    <Button Text="Retirar" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" Background="#2196F3" TextColor="White" Margin="0,0,0,10"
+                            Command="{Binding BindingContext.cmdIrRetirar, Source={x:Reference thisCuentaDetalle}}"
+                            />
+                </Grid>
+                <Label Text="{Binding BindingContext.Cuenta.Saldo, StringFormat='Saldo actual: ${0}', Source={x:Reference thisCuentaDetalle}}" HorizontalTextAlignment="Center" FontSize="25" Margin="0,0,0,20" />
+                <CollectionView 
+                            ItemsSource="{Binding BindingContext.Cuenta.Transacciones, Source={x:Reference thisCuentaDetalle}}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Transaccion6673">
+                            <Grid RowDefinitions="auto" ColumnDefinitions="120,auto" Margin="0,0,0,35">
+                                <Label Grid.Row="0" Grid.Column="0" Text="Tipo:" FontSize="18" />
+                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Tipo}" FontSize="18" FontAttributes="Bold" />
+                                <Label Grid.Row="1" Grid.Column="0" Text="Cantidad:" FontSize="18" />
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Cantidad, Mode=OneWay, StringFormat='${0}'}" FontSize="18" FontAttributes="Bold">
+                                    <Label.Style>
+                                        <Style TargetType="Label">
+                                            <Setter Property="TextColor" Value="Green"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Tipo}" Value="Abono" TargetType="Label">
+                                                    <Setter Property="TextColor" Value="Green"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Tipo}" Value="Retiro" TargetType="Label">
+                                                    <Setter Property="TextColor" Value="Red"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Label.Style>
+                                </Label>
+                                <Label Grid.Row="2" Grid.Column="0" Text="Realizada el: " FontSize="18" />
+                                <Label Grid.Row="2" Grid.Column="1" Text="{Binding Fecha, StringFormat='{0:dddd, dd MMMM yyyy HH:mm}'}" FontSize="18" FontAttributes="Bold" />
+                                <BoxView HeightRequest="1"
+                                         WidthRequest="500"
+                                         BackgroundColor="#e1e1e1"
+                                         VerticalOptions="Start"
+                                         Grid.Row="3"
+                                         Grid.ColumnSpan="2"
+                                         Margin="0,0,0,10"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

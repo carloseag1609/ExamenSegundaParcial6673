@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace ExamenSegundaParcial6673.ViewModel
 {
-    internal class CuentaViewModel6673 : BaseViewModel6673
+    public class CuentaViewModel6673 : BaseViewModel6673
     {
         #region Propiedades
         public ObservableCollection<Cuenta6673> Cuentas { get; set; }
